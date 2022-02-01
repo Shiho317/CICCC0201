@@ -28,7 +28,7 @@ function sendHTTPRequest(method, url, data){
 
     // return promise
 
-
+//
     // return fetch(url) 
     // return axios(url)
 
