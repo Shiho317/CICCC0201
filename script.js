@@ -3,6 +3,7 @@ const postSection = document.querySelector('#single-post')
 const form = document.querySelector('#new-post form')
 const fetchButton = document.querySelector('#available-posts button')
 const postList = document.querySelector('ul')
+const deleteButton = document.querySelector('.post-item button')
 
 function sendHTTPRequest(method, url, data){
 
@@ -58,6 +59,10 @@ async function fetchPosts(){
             postElClone.querySelector('h2').textContent = post.title
             postElClone.querySelector('p').textContent = post.body
             postElClone.querySelector('li').id = post.id
+            postElClone.querySelector('button').addEventListener('click', (e) => {
+                deletePost(post.id);
+                listElement.removeChild(e.target.parentElement);
+            })
             listElement.appendChild(postElClone)
         }
     } catch (error) {
@@ -74,6 +79,11 @@ async function createPost(title, content){
     const result = await sendHTTPRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post)
     console.log(result)
 }
+
+async function deletePost(userId){
+    await sendHTTPRequest('DELETE', `https://jsonplaceholder.typicode.com/posts/${userId}`)
+}
+
 
 
 fetchButton.addEventListener('click', fetchPosts)
