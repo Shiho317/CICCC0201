@@ -62,6 +62,7 @@ async function fetchPosts(){
             postElClone.querySelector('button').addEventListener('click', (e) => {
                 deletePost(post.id);
                 listElement.removeChild(e.target.parentElement);
+                console.log(post)
             })
             listElement.appendChild(postElClone)
         }
